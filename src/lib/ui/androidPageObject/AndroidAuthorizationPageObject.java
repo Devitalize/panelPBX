@@ -9,7 +9,10 @@ public class AndroidAuthorizationPageObject extends AuthorizationPageObject {
         REGISTRATION = "id:com.onlinepbx.panel:id/button_signup";
         LOGIN = "id:com.onlinepbx.panel:id/inputtext_email";
         PASSWORD = "id:com.onlinepbx.panel:id/inputtext_password";
+        TEXT_ERROR = "id:com.onlinepbx.panel:id/textinput_error";
+        ERROR_NOT_CONNECTION = "id:com.onlinepbx.panel:id/alertTitle";
 
     }
     public  AndroidAuthorizationPageObject(AppiumDriver driver){ super(driver);}
+
 }
