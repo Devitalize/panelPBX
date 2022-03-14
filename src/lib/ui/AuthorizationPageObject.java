@@ -3,14 +3,16 @@ package lib.ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
 
-abstract public class AuthorizationPageObject extends MainPageObject {
-    protected static String
-            AUTHORIZATION,
-            REGISTRATION,
-            LOGIN,
-            PASSWORD,
-            TEXT_ERROR,
-            ERROR_NOT_CONNECTION;
+ public class AuthorizationPageObject extends MainPageObject {
+   private  static final String
+         AUTHORIZATION = "id:com.onlinepbx.panel:id/button_login",
+         REGISTRATION = "id:com.onlinepbx.panel:id/button_signup",
+         LOGIN = "id:com.onlinepbx.panel:id/inputtext_email",
+         PASSWORD = "id:com.onlinepbx.panel:id/inputtext_password",
+         TEXT_ERROR = "id:com.onlinepbx.panel:id/textinput_error",
+         ERROR_NOT_CONNECTION = "id:com.onlinepbx.panel:id/alertTitle",
+         BUTTON_X = "id:com.onlinepbx.panel:id/button_close";
+
 
     public AuthorizationPageObject(AppiumDriver driver) {
         super(driver);
@@ -73,6 +75,14 @@ abstract public class AuthorizationPageObject extends MainPageObject {
     public String getTitleError(){
         WebElement title_error = waitForErrorNotConnection();
         return title_error.getAttribute("text");
-    };
+    }
 
+    //Клин на крестик для возвращения на приветственный экран
+     public void buttonXclick(){
+        this.waitForElementAndClick(
+                BUTTON_X,
+                "Не удалось кликнуть на кнопку крестика",
+                10
+        );
+     }
 }

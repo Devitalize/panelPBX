@@ -1,10 +1,6 @@
 package tests;
 
 import lib.ui.*;
-import lib.ui.androidPageObject.AndroidAccountPageObject;
-import lib.ui.androidPageObject.AndroidAuthorizationPageObject;
-import lib.ui.androidPageObject.AndroidNavigationUI;
-import lib.ui.androidPageObject.AndroidSystemSettingsPageObject;
 import org.junit.Test;
 
 public class AuthorizationTest extends CoreTestCase {
@@ -14,9 +10,9 @@ public class AuthorizationTest extends CoreTestCase {
     @Test
     //Успешная авторизация
     public void testSuccessfulAuthorization(){
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
-        NavigationUI NavigationUI = new AndroidNavigationUI(driver);
-        AccountPageObject AccountPageObject = new AndroidAccountPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+        NavigationUI NavigationUI = new NavigationUI(driver);
+        AccountPageObject AccountPageObject = new AccountPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
         AuthorizationPageObject.loginSendKeys(login);
@@ -34,7 +30,7 @@ public class AuthorizationTest extends CoreTestCase {
     //Отображение ошибки при пустом логине
     @Test
     public void testEmptyLogin() {
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
         AuthorizationPageObject.passwordSendKeys(password);
@@ -49,7 +45,7 @@ public class AuthorizationTest extends CoreTestCase {
     //Отображение ошибки при пустом пароле
     @Test
     public void testEmptyPassword() {
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
         AuthorizationPageObject.loginSendKeys(login);
@@ -64,7 +60,7 @@ public class AuthorizationTest extends CoreTestCase {
     //Отображение ошибки при вводе невалидного логина
     @Test
     public void testLoginInvalid(){
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
         AuthorizationPageObject.loginSendKeys("111");
@@ -80,7 +76,7 @@ public class AuthorizationTest extends CoreTestCase {
     //Отображение ошибки при отсутствии данной почты в системе
     @Test
     public void testLoginDoesNotExist(){
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
         AuthorizationPageObject.loginSendKeys("111@nologin.com");
@@ -96,7 +92,7 @@ public class AuthorizationTest extends CoreTestCase {
     //Отображение ошибки при неверном пароле
     @Test
     public void testIncorrectPassword(){
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
         AuthorizationPageObject.loginSendKeys(login);
@@ -112,8 +108,8 @@ public class AuthorizationTest extends CoreTestCase {
     //Отображение ошибки при отсутствии интернета
     @Test
     public void testNoConnection(){
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
-        SystemSettingsPageObject SystemSettingsPageObject = new AndroidSystemSettingsPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+        SystemSettingsPageObject SystemSettingsPageObject = new SystemSettingsPageObject(driver);
 
         SystemSettingsPageObject.enableAirplaneMode();
         AuthorizationPageObject.buttonLoginClick();
@@ -132,9 +128,16 @@ public class AuthorizationTest extends CoreTestCase {
     //Возврат на приветственный экран
     @Test
     public void testReturnToWelcomeScreen(){
-        AuthorizationPageObject AuthorizationPageObject = new AndroidAuthorizationPageObject(driver);
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+        WelcomeScreenPageObject WelcomeScreenPageObject = new WelcomeScreenPageObject(driver);
 
         AuthorizationPageObject.buttonLoginClick();
+        AuthorizationPageObject.buttonXclick();
+        String title_welcome_screen = WelcomeScreenPageObject.getTitleWelcomeScreen();
+        assertEquals(
+                "Добро пожаловать!",
+                title_welcome_screen
+        );
 
     }
 }

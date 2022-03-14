@@ -2,12 +2,11 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-abstract public class SystemSettingsPageObject extends MainPageObject{
-    protected static String
-    SYSTEM_SETTING,
-    NETWORK,
-    AIRPLANE_MODE;
-
+ public class SystemSettingsPageObject extends MainPageObject{
+    private  static final String
+            SYSTEM_SETTING = "xpath://android.widget.TextView[@content-desc=\"Settings\"]",
+    NETWORK = "xpath://android.widget.TextView[@text='Network & internet']",
+    AIRPLANE_MODE = "id:android:id/switch_widget";
 
     public SystemSettingsPageObject(AppiumDriver driver) {
         super(driver);}

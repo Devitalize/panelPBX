@@ -2,12 +2,12 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 
-abstract public class NavigationUI extends MainPageObject{
-    protected static String
-    CALLS,
-    STATISTIC,
-    BILLING,
-    ACCOUNT;
+ public class NavigationUI extends MainPageObject{
+    private  static final String
+            CALLS = "id:com.onlinepbx.panel:id/nav_graph_calls",
+    STATISTIC = "id:com.onlinepbx.panel:id/nav_graph_statistic",
+    BILLING = "id:com.onlinepbx.panel:id/nav_graph_payment",
+    ACCOUNT = "id:com.onlinepbx.panel:id/nav_graph_account";
 
     public NavigationUI(AppiumDriver driver){super(driver);}
     //Клик на вкладку Звонки
