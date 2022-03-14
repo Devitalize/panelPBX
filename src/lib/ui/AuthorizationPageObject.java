@@ -10,8 +10,10 @@ import org.openqa.selenium.WebElement;
          LOGIN = "id:com.onlinepbx.panel:id/inputtext_email",
          PASSWORD = "id:com.onlinepbx.panel:id/inputtext_password",
          TEXT_ERROR = "id:com.onlinepbx.panel:id/textinput_error",
+     TITLE = "id:com.onlinepbx.panel:id/textview_title",
          ERROR_NOT_CONNECTION = "id:com.onlinepbx.panel:id/alertTitle",
-         BUTTON_X = "id:com.onlinepbx.panel:id/button_close";
+         BUTTON_X = "id:com.onlinepbx.panel:id/button_close",
+           PASSWORD_RECOVERY_BUTTON = "id:com.onlinepbx.panel:id/textview_forgot_password";
 
 
     public AuthorizationPageObject(AppiumDriver driver) {
@@ -47,18 +49,13 @@ import org.openqa.selenium.WebElement;
         );
     }
 
-    //Ожидание появления ошибки
-    public WebElement waitForTextError() {
-        return this.waitForElementPresent(
+    //Возвращает текст ошибки
+    public String getTextError() {
+        WebElement error_text = this.waitForElementPresent(
                 TEXT_ERROR,
                 "Не найдено поле с ошибкой",
                 15
         );
-    }
-
-    //Возвращает текст ошибки
-    public String getTextError() {
-        WebElement error_text = waitForTextError();
         return error_text.getAttribute("text");
     }
 
@@ -84,5 +81,23 @@ import org.openqa.selenium.WebElement;
                 "Не удалось кликнуть на кнопку крестика",
                 10
         );
+     }
+
+     //Клик на кнопку восстановления пароля
+     public void passwordRecoveryClick(){
+        this.waitForElementAndClick(
+                PASSWORD_RECOVERY_BUTTON,
+                "Не удалось кликнуть на кнопку восстановления пароля",
+                10
+        );
+     }
+     //Возвращает текст ошибки
+     public String getTitleText() {
+         WebElement title_text = this.waitForElementPresent(
+                 TITLE,
+                 "Не найден заголовок Вход",
+                 15
+         );
+         return title_text.getAttribute("text");
      }
 }

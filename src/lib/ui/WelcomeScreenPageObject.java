@@ -10,6 +10,15 @@ import org.openqa.selenium.WebElement;
     REGISTER = "id:com.onlinepbx.panel:id/button_signup";
     public WelcomeScreenPageObject(AppiumDriver driver){super(driver);}
 
+     //Клик на кнопку Войти
+     public void buttonLoginClick() {
+         this.waitForElementAndClick(
+                 LOGIN,
+                 "Не удалось кликнуть на кнопку ВОЙТИ",
+                 10
+         );
+     }
+
     //Возвращает заголовок приветственного экрана
     public String getTitleWelcomeScreen(){
         WebElement title_welcome_screen = this.waitForElementPresent(
