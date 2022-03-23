@@ -1,9 +1,9 @@
 package tests;
 
-import lib.ui.AuthorizationPageObject;
-import lib.ui.CoreTestCase;
-import lib.ui.PasswordRecoveryPageObject;
-import lib.ui.WelcomeScreenPageObject;
+import uiPageObject.AuthorizationPageObject;
+import uiPageObject.CoreTestCase;
+import uiPageObject.PasswordRecoveryPageObject;
+import uiPageObject.WelcomeScreenPageObject;
 import org.junit.Test;
 
 public class PasswordRecoveryTest extends CoreTestCase {

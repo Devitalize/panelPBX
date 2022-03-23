@@ -1,7 +1,7 @@
 package tests;
 
-import lib.ui.*;
 import org.junit.Test;
+import uiPageObject.*;
 
 public class AuthorizationTest extends CoreTestCase {
     String login = "888-1@mailu.onlinepbx.ru";
@@ -146,6 +146,4 @@ public class AuthorizationTest extends CoreTestCase {
                 title_welcome_screen
         );
     }
-
-
 }

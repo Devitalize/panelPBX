@@ -1,7 +1,7 @@
 package tests;
 
-import lib.ui.*;
 import org.junit.Test;
+import uiPageObject.*;
 
 public class RegistrationPageNameAndPhoneTest extends CoreTestCase {
 

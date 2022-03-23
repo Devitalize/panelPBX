@@ -1,9 +1,9 @@
 package tests;
 
-import lib.ui.CoreTestCase;
-import lib.ui.RegistrationPageObject;
-import lib.ui.SystemSettingsPageObject;
-import lib.ui.WelcomeScreenPageObject;
+import uiPageObject.CoreTestCase;
+import uiPageObject.RegistrationPageObject;
+import uiPageObject.SystemSettingsPageObject;
+import uiPageObject.WelcomeScreenPageObject;
 import org.junit.Test;
 
 public class RegistrationPageEmailAndPasswordTest extends CoreTestCase {

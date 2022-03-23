@@ -1,15 +1,17 @@
 package tests;
 
-import lib.ui.AccountPageObject;
-import lib.ui.AuthorizationPageObject;
-import lib.ui.CoreTestCase;
-import lib.ui.NavigationUI;
+import uiPageObject.AccountPageObject;
+import uiPageObject.AuthorizationPageObject;
+import uiPageObject.CoreTestCase;
+import uiPageObject.NavigationUI;
 import org.junit.Test;
 
 public class AccountTest extends CoreTestCase {
 
     String login = "888-1@mailu.onlinepbx.ru";
     String password = "556898";
+
+    //Смена имени в профиле
     @Test
     public void testProfileNameRename(){
         AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
@@ -18,5 +20,44 @@ public class AccountTest extends CoreTestCase {
 
         AuthorizationPageObject.successfulAuthorization(login, password);
         NavigationUI.clickNavigationAccount();
+        AccountPageObject.profileClick();
+        AccountPageObject.nameClick();
+        String new_name = AccountPageObject.nameFromDate();
+        AccountPageObject.editProfileSendKeys(new_name);
+        AccountPageObject.buttonApplyClick();
+        String name = AccountPageObject.getNameText();
+        assertEquals(
+                name,
+                new_name
+        );
     }
+
+    //Смена номера телефона в профиле
+    @Test
+    public void testProfileNumberEdit(){
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+        NavigationUI NavigationUI = new NavigationUI(driver);
+        AccountPageObject AccountPageObject = new AccountPageObject(driver);
+
+        AuthorizationPageObject.successfulAuthorization(login, password);
+        NavigationUI.clickNavigationAccount();
+        AccountPageObject.profileClick();
+        String new_phone = AccountPageObject.getNewPhone();
+        AccountPageObject.numberClick();
+        AccountPageObject.editProfileSendKeys(new_phone);
+        AccountPageObject.buttonApplyClick();
+        String phone = AccountPageObject.getPhoneText();
+        assertEquals(
+                phone,
+                new_phone
+        );
+    }
+
+    //Смена почты в профиле
+
+    //Смена ппароля в профиле
+
+    //Смена часового пояса в профиле
+
+    //Смена режима защиты по айпи в профиле
 }

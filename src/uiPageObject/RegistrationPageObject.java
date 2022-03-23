@@ -1,8 +1,7 @@
-package lib.ui;
+package uiPageObject;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidKeyCode;
 import org.openqa.selenium.WebElement;
 
 public class RegistrationPageObject extends MainPageObject {

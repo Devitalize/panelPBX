@@ -1,7 +1,6 @@
-package lib.ui;
+package uiPageObject;
 
 import io.appium.java_client.AppiumDriver;
-import org.apache.regexp.RE;
 import org.openqa.selenium.WebElement;
 
  public class WelcomeScreenPageObject extends MainPageObject{
