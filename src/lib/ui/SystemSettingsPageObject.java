@@ -1,8 +1,12 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
 
- public class SystemSettingsPageObject extends MainPageObject{
+import java.time.Duration;
+
+public class SystemSettingsPageObject extends MainPageObject{
     private  static final String
             SYSTEM_SETTING = "xpath://android.widget.TextView[@content-desc=\"Settings\"]",
     NETWORK = "xpath://android.widget.TextView[@text='Network & internet']",
@@ -11,9 +15,14 @@ import io.appium.java_client.AppiumDriver;
     public SystemSettingsPageObject(AppiumDriver driver) {
         super(driver);}
 
+     //Клик на кнопку HOME для сворачивания
+     public void buttonHomeClick(){((AndroidDriver)driver).pressKeyCode(AndroidKeyCode.HOME);
+
+     }
     //Включение режима полёта
-    public void enableAirplaneMode(){
-        driver.closeApp();
+    public void switchingAirplaneMode(){
+       // buttonHomeClick();
+        driver.runAppInBackground(Duration.ofSeconds(15));
         this.waitForElementAndClick(SYSTEM_SETTING,
                 "Не удалось кликнуть на иконку Настройки",
         10);
@@ -27,16 +36,7 @@ import io.appium.java_client.AppiumDriver;
                 "Не удалось кликнуть на переключатель режима полёта",
                 10
         );
-        driver.resetApp();
-    }
-
-    //Отключение режима полёта
-    public void disableAirplaneMode(){
-        driver.closeApp();
-        this.waitForElementAndClick(
-                AIRPLANE_MODE,
-                "Не удалось кликнуть на переключатель режима полёта",
-                10
-        );
+       // driver.resetApp();
+        driver.runAppInBackground(Duration.ofSeconds(5));
     }
 }

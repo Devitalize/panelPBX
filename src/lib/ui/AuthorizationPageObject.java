@@ -6,11 +6,10 @@ import org.openqa.selenium.WebElement;
  public class AuthorizationPageObject extends MainPageObject {
    private  static final String
          AUTHORIZATION = "id:com.onlinepbx.panel:id/button_login",
-         REGISTRATION = "id:com.onlinepbx.panel:id/button_signup",
          LOGIN = "id:com.onlinepbx.panel:id/inputtext_email",
          PASSWORD = "id:com.onlinepbx.panel:id/inputtext_password",
          TEXT_ERROR = "id:com.onlinepbx.panel:id/textinput_error",
-     TITLE = "id:com.onlinepbx.panel:id/textview_title",
+           TITLE = "id:com.onlinepbx.panel:id/textview_title",
          ERROR_NOT_CONNECTION = "id:com.onlinepbx.panel:id/alertTitle",
          BUTTON_X = "id:com.onlinepbx.panel:id/button_close",
            PASSWORD_RECOVERY_BUTTON = "id:com.onlinepbx.panel:id/textview_forgot_password";
@@ -99,5 +98,13 @@ import org.openqa.selenium.WebElement;
                  15
          );
          return title_text.getAttribute("text");
+     }
+
+     //Успешная авторизация
+     public void successfulAuthorization(String login, String password){
+        buttonLoginClick();
+        loginSendKeys(login);
+        passwordSendKeys(password);
+        buttonLoginClick();
      }
 }
