@@ -41,7 +41,7 @@ import io.appium.java_client.AppiumDriver;
                 this.waitForElementAndClick(
                         ACCOUNT,
                         "Не удалось кликнуть на вкладку Аккаунт",
-                        10
+                        15
                 );
             }
 }

@@ -157,7 +157,7 @@ public class MainPageObject {
     }
 
     //Выбор по какому критерию локатора искать
-    private By getLocatorByString(String locator_with_type) {
+    public By getLocatorByString(String locator_with_type) {
         String[] exploded_locator = locator_with_type.split(Pattern.quote(":"), 2);
         String by_type = exploded_locator[0];
         String locator = exploded_locator[1];

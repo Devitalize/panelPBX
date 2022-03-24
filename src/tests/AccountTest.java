@@ -13,7 +13,7 @@ public class AccountTest extends CoreTestCase {
 
     //Смена имени в профиле
     @Test
-    public void testProfileNameRename(){
+    public void testProfileNameRename() {
         AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
         NavigationUI NavigationUI = new NavigationUI(driver);
         AccountPageObject AccountPageObject = new AccountPageObject(driver);
@@ -34,7 +34,7 @@ public class AccountTest extends CoreTestCase {
 
     //Смена номера телефона в профиле
     @Test
-    public void testProfileNumberEdit(){
+    public void testProfileNumberEdit() {
         AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
         NavigationUI NavigationUI = new NavigationUI(driver);
         AccountPageObject AccountPageObject = new AccountPageObject(driver);
@@ -55,9 +55,48 @@ public class AccountTest extends CoreTestCase {
 
     //Смена почты в профиле
 
-    //Смена ппароля в профиле
+    //Смена пароля в профиле
 
     //Смена часового пояса в профиле
+    @Test
+    public void testProfileTimeZoneEdit() {
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+        NavigationUI NavigationUI = new NavigationUI(driver);
+        AccountPageObject AccountPageObject = new AccountPageObject(driver);
+
+        AuthorizationPageObject.successfulAuthorization(login, password);
+        NavigationUI.clickNavigationAccount();
+        AccountPageObject.profileClick();
+        String old_time_zone = AccountPageObject.getTimeZoneText();
+       String time_zone = AccountPageObject.timeZoneSelect(old_time_zone);
+        AccountPageObject.timeZoneClick();
+        AccountPageObject.timeZoneSelectClick(time_zone);
+        assertEquals(
+                AccountPageObject.getTimeZoneText(),
+                "UTC" + time_zone);
+    }
+
+    //Отображение часового пояса +0
+    @Test
+    public void testProfileTimeZoneEditForNull() {
+        AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+        NavigationUI NavigationUI = new NavigationUI(driver);
+        AccountPageObject AccountPageObject = new AccountPageObject(driver);
+
+        AuthorizationPageObject.successfulAuthorization(login, password);
+        NavigationUI.clickNavigationAccount();
+        AccountPageObject.profileClick();
+        String old_time_zone = AccountPageObject.getTimeZoneText().replace("UTC", "");
+        String time_zone = "+0";
+        AccountPageObject.timeZoneClick();
+        AccountPageObject.timeZoneSelectClick(time_zone);
+        assertEquals(
+                AccountPageObject.getTimeZoneText(),
+                "UTC" + time_zone);
+        AccountPageObject.timeZoneClick();
+        AccountPageObject.timeZoneSelectClick(old_time_zone); //Возвращаем предыдущую тайм-зону для проверок остальных тайм-зон
+    }
+
 
     //Смена режима защиты по айпи в профиле
 }

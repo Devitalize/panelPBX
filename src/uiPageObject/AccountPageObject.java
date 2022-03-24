@@ -1,9 +1,15 @@
 package uiPageObject;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.junit.Assert;
 
+import java.time.Duration;
 import java.util.Date;
 
 public class AccountPageObject extends MainPageObject {
@@ -19,6 +25,8 @@ public class AccountPageObject extends MainPageObject {
             EMAIL = "id:com.onlinepbx.panel:id/linearlayout_email",
             PASSWORD = "id:com.onlinepbx.panel:id/linearlayout_password",
             TIME_ZONE = "id:com.onlinepbx.panel:id/imageview_timezone",
+            TIME_ZONE_TEXT = "id:com.onlinepbx.panel:id/textview_timezone",
+            TIME_ZONE_SELECT = "xpath://*[@text='UTC{TIME}']",
             SWITCH_IP_SECURE = "id:com.onlinepbx.panel:id/switch_ip_secure",
             ACCOUNT_TEXT = "id:com.onlinepbx.panel:id/textview_account",
             NAME_TEXT = "id:com.onlinepbx.panel:id/textview_name",
@@ -68,7 +76,7 @@ public class AccountPageObject extends MainPageObject {
     }
 
     //Создание уникального имени в виде текущей даты
-    public String nameFromDate(){
+    public String nameFromDate() {
         Date date = new Date();
         String str_date = String.valueOf(date);
         return str_date;
@@ -84,7 +92,7 @@ public class AccountPageObject extends MainPageObject {
     }
 
     //Приводит номер телефона к числовому формату и возвращает результат -1
-    public String getNewPhone(){
+    public String getNewPhone() {
         String old_phone = getPhoneText();
         long old_phone_int = Long.parseLong(old_phone);
         long new_phone_int = old_phone_int - 1;
@@ -117,6 +125,90 @@ public class AccountPageObject extends MainPageObject {
                 "Не удалось кликнуть в поле часового пояса",
                 10
         );
+    }
+
+    //Изменение подстроки для поиска нужного заголовка
+    private static String getSelectTimeZone(String substring) {
+        return TIME_ZONE_SELECT.replace("{TIME}", substring);
+    }
+
+    //Выбор часового пояса
+    public void timeZoneSelectClick(String time_zone) {
+        String name_time_zone_xpath = getSelectTimeZone(time_zone);
+        swipeUpToFindElement(
+                name_time_zone_xpath,
+                "Не найден часовой пояс " + time_zone,
+                20
+        );
+        this.waitForElementAndClick(
+                name_time_zone_xpath,
+                "Не удалось выбрать таймзону",
+                10
+        );
+    }
+
+    //Свайп снизу вверх
+    public void swipeUp(int timeOfSwipe) {
+        TouchAction action = new TouchAction(driver);
+        Dimension size = driver.manage().window().getSize();
+        int x = size.width / 3;
+        int start_y = (int) (size.height * 0.6);
+        int end_y = (int) (size.height * 0.4);
+
+        action
+                .press(PointOption.point(x, start_y))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(timeOfSwipe)))
+                .moveTo(PointOption.point(x, end_y))
+                .release().perform();
+    }
+
+
+
+    //Свайп вверх с поиском элемента
+    public void swipeUpToFindElement(String locator, String error_message, int max_swipes) {
+        By by = this.getLocatorByString(locator);
+        int already_swipes = 0;
+        while (driver.findElements(by).size() == 0) {
+            if (already_swipes > max_swipes) {
+                waitForElementPresent(locator, "Cannot find element by swiping up. \n " + error_message, 0);
+                return;
+            }
+            swipeUp(200);
+            ++already_swipes;
+        }
+    }
+
+
+
+
+    //Возвращает текст таймзоны
+    public String getTimeZoneText() {
+        WebElement time_zone = this.waitForElementPresent(
+                TIME_ZONE_TEXT,
+                "Не найдена нужная таймзона",
+                10
+        );
+        return time_zone.getAttribute("text");
+    }
+
+    //Смена часового пояса в зависимости от текущего
+    public String timeZoneSelect(String old_time_zone) {
+        String time_zone_text = old_time_zone.replace("UTC", "");
+        int time_zone_int = Integer.parseInt(time_zone_text);
+        System.out.println(time_zone_int);
+        if (time_zone_int <= 12 && time_zone_int >= 0) {
+            time_zone_int--;
+            String time_zone_str = String.valueOf(time_zone_int);
+            if (time_zone_int > -1) {
+                return "+" + time_zone_str;
+            } else {
+                return time_zone_str;
+            }
+        } else {
+            time_zone_int++;
+            String time_zone_str = String.valueOf(time_zone_int);
+            return time_zone_str;
+        }
     }
 
     //Клик на переключатель Защиты по IP
