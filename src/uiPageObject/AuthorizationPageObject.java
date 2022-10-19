@@ -12,7 +12,9 @@ import org.openqa.selenium.WebElement;
            TITLE = "id:com.onlinepbx.panel:id/textview_title",
          ERROR_NOT_CONNECTION = "id:com.onlinepbx.panel:id/alertTitle",
          BUTTON_X = "id:com.onlinepbx.panel:id/button_close",
-           PASSWORD_RECOVERY_BUTTON = "id:com.onlinepbx.panel:id/textview_forgot_password";
+           PASSWORD_RECOVERY_BUTTON = "id:com.onlinepbx.panel:id/textview_forgot_password",
+           ACCOUNT = "id:com.onlinepbx.panel:id/nav_graph_account";
+     ;
 
 
     public AuthorizationPageObject(AppiumDriver driver) {
@@ -101,10 +103,13 @@ import org.openqa.selenium.WebElement;
      }
 
      //Успешная авторизация
-     public void successfulAuthorization(String login, String password){
+     public void successfulAuthorization(){
+        String login = "test8@8test8.ru";
+        String password = "test8TEST";
         buttonLoginClick();
         loginSendKeys(login);
         passwordSendKeys(password);
         buttonLoginClick();
      }
+
 }

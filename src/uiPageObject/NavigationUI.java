@@ -7,7 +7,8 @@ import io.appium.java_client.AppiumDriver;
             CALLS = "id:com.onlinepbx.panel:id/nav_graph_calls",
     STATISTIC = "id:com.onlinepbx.panel:id/nav_graph_statistic",
     BILLING = "id:com.onlinepbx.panel:id/nav_graph_payment",
-    ACCOUNT = "id:com.onlinepbx.panel:id/nav_graph_account";
+    ACCOUNT = "id:com.onlinepbx.panel:id/nav_graph_account",
+     ATS = "id:com.onlinepbx.panel:id/nav_graph_options";
 
     public NavigationUI(AppiumDriver driver){super(driver);}
     //Клик на вкладку Звонки
@@ -44,4 +45,13 @@ import io.appium.java_client.AppiumDriver;
                         15
                 );
             }
+
+     //Клик на вкладку Настройки(АТС)
+     public void clickNavigationATS() {
+         this.waitForElementAndClick(
+                 ATS,
+                 "Не удалось кликнуть на вкладку Настройки(АТС)",
+                 15
+         );
+     }
 }

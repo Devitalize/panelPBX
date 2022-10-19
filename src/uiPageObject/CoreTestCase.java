@@ -19,7 +19,7 @@ public class CoreTestCase extends TestCase {
         capabilites.setCapability("automationName", "Appium");
         capabilites.setCapability("appPackage", "com.onlinepbx.panel");
         capabilites.setCapability("appActivity", ".ui.EntranceActivity");
-        capabilites.setCapability("app", "C:/Users/pbx5/IdeaProjects/panelAndroid/panelPBX/apks/app-debug-65-dev.apk");
+        capabilites.setCapability("app", "/Users/valery/IdeaProjects/PanelAndroid/panelPBX/apks/2_5361784520322325392.apk");
 
         driver = new AndroidDriver(new URL(AppiumURL), capabilites);
     }

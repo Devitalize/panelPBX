@@ -148,12 +148,12 @@ public class AccountPageObject extends MainPageObject {
     }
 
     //Свайп снизу вверх
-    public void swipeUp(int timeOfSwipe) {
+    public void swipeUp(int timeOfSwipe, double start_swipe, double end_swipe) {
         TouchAction action = new TouchAction(driver);
         Dimension size = driver.manage().window().getSize();
         int x = size.width / 3;
-        int start_y = (int) (size.height * 0.6);
-        int end_y = (int) (size.height * 0.4);
+        int start_y = (int) (size.height * start_swipe);
+        int end_y = (int) (size.height * end_swipe);
 
         action
                 .press(PointOption.point(x, start_y))
@@ -173,7 +173,7 @@ public class AccountPageObject extends MainPageObject {
                 waitForElementPresent(locator, "Cannot find element by swiping up. \n " + error_message, 0);
                 return;
             }
-            swipeUp(200);
+            swipeUp(200, 0.7, 0.5);
             ++already_swipes;
         }
     }
@@ -199,7 +199,7 @@ public class AccountPageObject extends MainPageObject {
         if (time_zone_int <= 12 && time_zone_int >= 0) {
             time_zone_int--;
             String time_zone_str = String.valueOf(time_zone_int);
-            if (time_zone_int > -1) {
+            if (time_zone_int >= 0) {
                 return "+" + time_zone_str;
             } else {
                 return time_zone_str;
@@ -207,7 +207,11 @@ public class AccountPageObject extends MainPageObject {
         } else {
             time_zone_int++;
             String time_zone_str = String.valueOf(time_zone_int);
-            return time_zone_str;
+            if (time_zone_int >= 0) {
+                return "+" + time_zone_str;
+            } else {
+                return time_zone_str;
+            }
         }
     }
 

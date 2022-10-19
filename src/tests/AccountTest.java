@@ -8,9 +8,6 @@ import org.junit.Test;
 
 public class AccountTest extends CoreTestCase {
 
-    String login = "888-1@mailu.onlinepbx.ru";
-    String password = "556898";
-
     //Смена имени в профиле
     @Test
     public void testProfileNameRename() {
@@ -18,7 +15,7 @@ public class AccountTest extends CoreTestCase {
         NavigationUI NavigationUI = new NavigationUI(driver);
         AccountPageObject AccountPageObject = new AccountPageObject(driver);
 
-        AuthorizationPageObject.successfulAuthorization(login, password);
+        AuthorizationPageObject.successfulAuthorization();
         NavigationUI.clickNavigationAccount();
         AccountPageObject.profileClick();
         AccountPageObject.nameClick();
@@ -39,7 +36,7 @@ public class AccountTest extends CoreTestCase {
         NavigationUI NavigationUI = new NavigationUI(driver);
         AccountPageObject AccountPageObject = new AccountPageObject(driver);
 
-        AuthorizationPageObject.successfulAuthorization(login, password);
+        AuthorizationPageObject.successfulAuthorization();
         NavigationUI.clickNavigationAccount();
         AccountPageObject.profileClick();
         String new_phone = AccountPageObject.getNewPhone();
@@ -64,7 +61,7 @@ public class AccountTest extends CoreTestCase {
         NavigationUI NavigationUI = new NavigationUI(driver);
         AccountPageObject AccountPageObject = new AccountPageObject(driver);
 
-        AuthorizationPageObject.successfulAuthorization(login, password);
+        AuthorizationPageObject.successfulAuthorization();
         NavigationUI.clickNavigationAccount();
         AccountPageObject.profileClick();
         String old_time_zone = AccountPageObject.getTimeZoneText();
@@ -83,7 +80,7 @@ public class AccountTest extends CoreTestCase {
         NavigationUI NavigationUI = new NavigationUI(driver);
         AccountPageObject AccountPageObject = new AccountPageObject(driver);
 
-        AuthorizationPageObject.successfulAuthorization(login, password);
+        AuthorizationPageObject.successfulAuthorization();
         NavigationUI.clickNavigationAccount();
         AccountPageObject.profileClick();
         String old_time_zone = AccountPageObject.getTimeZoneText().replace("UTC", "");

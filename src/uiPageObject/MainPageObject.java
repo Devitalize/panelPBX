@@ -79,12 +79,12 @@ public class MainPageObject {
     }
 
     //Свайп снизу вверх
-    public void swipeUp(int timeOfSwipe) {
+    public void swipeUp(int timeOfSwipe, double start_swipe, double end_swipe) {
         TouchAction action = new TouchAction(driver);
         Dimension size = driver.manage().window().getSize();
         int x = size.width / 2;
-        int start_y = (int) (size.height * 0.8);
-        int end_y = (int) (size.height * 0.2);
+        int start_y = (int) (size.height * start_swipe);
+        int end_y = (int) (size.height * end_swipe);
 
         action
                 .press(PointOption.point(x, start_y))
@@ -94,12 +94,12 @@ public class MainPageObject {
     }
 
     //Свайп снизу вверх с указанием скорости свайпа
-    public void swipeUpQuick() {
-        swipeUp(200);
+    public void swipeUpQuick(double start_swipe, double end_swipe) {
+        swipeUp(200, start_swipe , end_swipe );
     }
 
     //Свайп вверх с поиском элемента
-    public void swipeUpToFindElement(String locator, String error_message, int max_swipes) {
+    public void swipeUpToFindElement(String locator, String error_message, int max_swipes, double start_swipe, double end_swipe) {
         By by = this.getLocatorByString(locator);
         int already_swipes = 0;
         while (driver.findElements(by).size() == 0) {
@@ -107,7 +107,7 @@ public class MainPageObject {
                 waitForElementPresent(locator, "Cannot find element by swiping up. \n " + error_message, 0);
                 return;
             }
-            swipeUpQuick();
+            swipeUpQuick(start_swipe, end_swipe);
             ++already_swipes;
         }
     }
